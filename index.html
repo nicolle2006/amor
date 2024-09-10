@@ -5,7 +5,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encuesta de Amor</title>
     <style>
-        /* Tu CSS aquí */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, rgba(240, 240, 240, 0.9), rgba(220, 220, 220, 0.9));
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            border: 2px solid rgba(200, 200, 200, 0.7);
+            backdrop-filter: blur(8px);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #e74c3c;
+            font-family: 'Georgia', serif;
+            font-weight: 600;
+        }
+
+        label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: #34495e;
+            font-weight: 400;
+        }
+
+        input[type="number"] {
+            width: 80%;
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 10px;
+            border: 2px solid #e91e63;
+            outline: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        input[type="number"]:focus {
+            border-color: #d81b60;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            background: #e91e63;
+            border: none;
+            color: white;
+            padding: 15px 25px;
+            text-align: center;
+            font-size: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background: #c2185b;
+            transform: scale(1.05);
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .success {
+            color: #2ecc71;
+        }
+
+        .error {
+            color: #e74c3c;
+        }
     </style>
 </head>
 <body>
