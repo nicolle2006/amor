@@ -135,16 +135,19 @@
 
             const porcentajeAmor = document.getElementById('porcentaje_amor').value;
             const messageElement = document.getElementById('message');
+            console.log('Porcentaje capturado: ', porcentajeAmor);
 
             // Guarda el dato en Firebase
             database.ref('niveles_amor').push({
                 porcentaje: porcentajeAmor
             })
             .then(() => {
+                console.log('Datos guardados en Firebase');
                 messageElement.textContent = "Nivel de amor guardado exitosamente";
                 messageElement.className = "message success";
             })
             .catch((error) => {
+                console.log('Error al guardar los datos en Firebase: ', error.message);
                 messageElement.textContent = "Error al guardar el dato: " + error.message;
                 messageElement.className = "message error";
             });
