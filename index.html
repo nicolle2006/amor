@@ -6,86 +6,108 @@
     <title>Encuesta de Amor</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #fef7f7;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, rgba(240, 240, 240, 0.9), rgba(220, 220, 220, 0.9));
             color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden;
         }
 
         .container {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            max-width: 400px;
+            background: rgba(255, 255, 255, 0.95); /* Fondo blanco con ligera transparencia */
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 500px;
             width: 100%;
             text-align: center;
+            border: 2px solid rgba(200, 200, 200, 0.7);
+            backdrop-filter: blur(8px); /* Desenfoque al fondo */
         }
 
         h1 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 20px;
+            color: #e74c3c; /* Rosa suave para el título */
+            font-family: 'Georgia', serif;
+            font-weight: 600;
         }
 
         label {
             display: block;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: #34495e; /* Gris azulado */
+            font-weight: 400;
         }
 
-        input[type="range"] {
-            width: 100%;
-            margin: 10px 0;
+        input[type="number"] {
+            width: 80%;
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 10px;
+            border: 2px solid #e91e63; /* Rosa intenso */
+            outline: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+            background: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
         }
 
-        output {
-            font-size: 1.2rem;
-            margin: 10px 0;
-            display: block;
+        input[type="number"]:focus {
+            border-color: #d81b60; /* Rosa más intenso */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         button {
-            background-color: #ff6f61;
+            background: #e91e63; /* Rosa intenso */
             border: none;
             color: white;
-            padding: 10px 20px;
+            padding: 15px 25px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
             font-size: 1rem;
-            margin: 10px 0;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         button:hover {
-            background-color: #ff4b47;
+            background: #c2185b; /* Rosa más oscuro */
+            transform: scale(1.05);
         }
 
-        .error {
-            color: red;
+        .message {
+            margin-top: 20px;
+            font-size: 1rem;
+            font-weight: 500;
         }
 
         .success {
-            color: green;
+            color: #2ecc71; /* Verde para éxito */
+        }
+
+        .error {
+            color: #e74c3c; /* Rojo para error */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>¿En un porcentaje del 1 al 100 qué tan dispuesto estás a regresar hoy?</h1>
+        <h1>❤️ ¿En un porcentaje del 1 al 100 qué tan dispuesto estás de regresar hoy conmigo? ❤️</h1>
         <form id="surveyForm">
-            <label for="porcentaje_amor">Selecciona tu porcentaje:</label>
-            <input type="range" id="porcentaje_amor" name="porcentaje_amor" min="1" max="100" step="1" value="50">
-            <output id="rangeValue">50</output>
-            <br><br>
-            <button type="submit">Guardar</button>
+            <label for="porcentaje_amor">Introduce tu porcentaje:</label>
+            <input type="number" id="porcentaje_amor" name="porcentaje_amor" min="1" max="100" step="1" value="50">
+            <br>
+            <button type="submit">💌 Guardar 💌</button>
         </form>
-        <p id="message"></p>
+        <p id="message" class="message"></p>
     </div>
     <!-- Agrega el SDK de Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
@@ -106,11 +128,6 @@
         const app = firebase.initializeApp(firebaseConfig);
         const database = firebase.database(app);
 
-        // Actualiza el valor del rango en el output
-        document.getElementById('porcentaje_amor').addEventListener('input', function() {
-            document.getElementById('rangeValue').textContent = this.value;
-        });
-
         // Maneja el envío del formulario
         document.getElementById('surveyForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Evita el comportamiento por defecto del formulario
@@ -124,11 +141,11 @@
             })
             .then(() => {
                 messageElement.textContent = "Nivel de amor guardado exitosamente";
-                messageElement.className = "success";
+                messageElement.className = "message success";
             })
             .catch((error) => {
                 messageElement.textContent = "Error al guardar el dato: " + error.message;
-                messageElement.className = "error";
+                messageElement.className = "message error";
             });
         });
     </script>
