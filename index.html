@@ -109,25 +109,26 @@
     </div>
 
     <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js"></script>
-    
     <script type="module">
-        // Configura tu proyecto de Firebase
+        // Importa las funciones necesarias desde Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
+
+        // Configuración de Firebase
         const firebaseConfig = {
-            apiKey: "AIzaSyATDUDWr5nG8XtUiipsSJzdS9F581qdZYs",
-            authDomain: "base-de-datos-amor.firebaseapp.com",
-            databaseURL: "https://base-de-datos-amor.firebaseio.com", // Asegúrate de tener la URL correcta
-            projectId: "base-de-datos-amor",
-            storageBucket: "base-de-datos-amor.appspot.com",
-            messagingSenderId: "271807318249",
-            appId: "1:271807318249:web:9bc99c38dab283da9bc878",
-            measurementId: "G-D24ZP1MHCJ"
+            apiKey: "AIzaSyAbZse9gVr-wJ-sb2A7hRJop0Nl7qPafsE",
+            authDomain: "amor-porcentaje.firebaseapp.com",
+            databaseURL: "https://amor-porcentaje-default-rtdb.firebaseio.com",
+            projectId: "amor-porcentaje",
+            storageBucket: "amor-porcentaje.appspot.com",
+            messagingSenderId: "319732157062",
+            appId: "1:319732157062:web:fd34d8393fac2776be5f07",
+            measurementId: "G-293SKTV90Z"
         };
 
         // Inicializa Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const database = firebase.database(app);
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app); // Obtén la referencia a la base de datos
 
         // Maneja el envío del formulario
         document.getElementById('surveyForm').addEventListener('submit', function(event) {
@@ -138,7 +139,9 @@
             console.log('Porcentaje capturado: ', porcentajeAmor);
 
             // Guarda el dato en Firebase
-            database.ref('niveles_amor').push({
+            const amorRef = ref(database, 'niveles_amor'); // Referencia a la ubicación en la base de datos
+            const newAmorRef = push(amorRef); // Crea una nueva clave única
+            set(newAmorRef, {
                 porcentaje: porcentajeAmor
             })
             .then(() => {
